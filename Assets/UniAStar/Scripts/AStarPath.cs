@@ -478,27 +478,27 @@ namespace UniAStar
 				}
 			}
 
-			private List<InnerNode> diagonalSuccessors (bool xN, bool xS, bool xE, bool xW, int north, int south, int east, int west, AStarMap map, int rows, int cols, List<InnerNode> result) 
+			private List<InnerNode> diagonalSuccessors (bool is_north_available, bool is_south_available, bool is_east_available, bool is_west_available, int north, int south, int east, int west, AStarMap map, int rows, int cols, List<InnerNode> result) 
 			{
-				if (xN) 
+				if (is_north_available) 
 				{
-					if (xE && map.Spots[east,north].IsAvailable && map.AllowDirection.northEast)
+					if (is_east_available && map.Spots[east,north].IsAvailable && map.AllowDirection.northEast)
 					{
 						result.Add(new InnerNode(east, north));
 					}
-					if (xW && map.Spots[west,north].IsAvailable && map.AllowDirection.northWest)
+					if (is_west_available && map.Spots[west,north].IsAvailable && map.AllowDirection.northWest)
 					{
 						result.Add(new InnerNode(west, north));
 					}
 				}
 
-				if (xS) 
+				if (is_south_available) 
 				{
-					if (xE && map.Spots[east,south].IsAvailable && map.AllowDirection.southEast) 
+					if (is_east_available && map.Spots[east,south].IsAvailable && map.AllowDirection.southEast) 
 					{
 						result.Add(new InnerNode(east, south));
 					}
-					if (xW && map.Spots[west,south].IsAvailable && map.AllowDirection.southWest) 
+					if (is_west_available && map.Spots[west,south].IsAvailable && map.AllowDirection.southWest) 
 					{
 						result.Add(new InnerNode(west, south));
 					}
