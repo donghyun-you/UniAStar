@@ -75,7 +75,7 @@ namespace UniAStar.UnitTest
 			{
 				for(int x=0,dX=testMap.GetLength(0);x<dX;x++)
 				{
-					aStarMap.Map[x,y].IsAvailable = testMap[y,x];
+					aStarMap.Spots[x,y].IsAvailable = testMap[y,x];
 				}
 			}
 
@@ -482,13 +482,13 @@ namespace UniAStar.UnitTest
 				AssertIf("path",path).Should.Not.Be.Null(path.ToString());
 				AssertIf("path validation",path.IsValid).Should.Be.True();
 
-				map.Map[0,1].IsAvailable = false;
+				map.Spots[0,1].IsAvailable = false;
 
 				AssertIf("path validation after 0/1 turn to unavailable",path.IsValid).Should.Be.False();
 
 				path.Dispose();
 				path = null;
-				map.Map[0,1].IsAvailable = true;
+				map.Spots[0,1].IsAvailable = true;
 
 				map.FindPathAsync(new AStarPosition(0,0),new AStarPosition(0,2),result=>
 				{
@@ -497,7 +497,7 @@ namespace UniAStar.UnitTest
 
 				yield return null;
 
-				map.Map[0,1].IsAvailable = false;
+				map.Spots[0,1].IsAvailable = false;
 
 				while(path == null) yield return null;
 
@@ -506,7 +506,7 @@ namespace UniAStar.UnitTest
 
 				path.Dispose();
 				path = null;
-				map.Map[0,1].IsAvailable = true;
+				map.Spots[0,1].IsAvailable = true;
 
 				yield return null;
 
@@ -515,7 +515,7 @@ namespace UniAStar.UnitTest
 					path = result;
 				});
 				
-				map.Map[0,1].IsAvailable = false;
+				map.Spots[0,1].IsAvailable = false;
 
 				while(path == null) yield return null;
 

@@ -13,7 +13,7 @@ A* implementation based on ported version of http://devpro.it/code/137.html (MIT
 - Optimized for C# (pooling(Pool<T>), struct based operations for reduce garbages)
 - Async operation throught thread pool
 - Unit test codes has included with UniTest (remove UniTest,UniEditor folder on release your product)
-- currently GC Allocating 0.2x kb + 104byte*number of not disposed AStarPath(s) on AStarMap for every path finds
+- Currently GC Allocating 0.2x kb + 104byte*number of not disposed AStarPath(s) on AStarMap for every path finds
 
 ## Usage
 

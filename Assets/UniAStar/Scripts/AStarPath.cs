@@ -158,7 +158,7 @@ namespace UniAStar
 
 		public override string ToString ()
 		{
-			return string.Format ("[AStarPath: IsReachable={0}, IsValid={1}, Path={2}, StartAt={3}, DestinationAt={4}]", IsReachable, IsValid, string.Join("->",this.Select(spot=>string.Format("[{0}x{1}:{2}]",spot.x,spot.y,(this.Map.Map[spot.x,spot.y].IsAvailable?"O":"X"))).ToArray()), Begin, End);
+			return string.Format ("[AStarPath: IsReachable={0}, IsValid={1}, Path={2}, StartAt={3}, DestinationAt={4}]", IsReachable, IsValid, string.Join("->",this.Select(spot=>string.Format("[{0}x{1}:{2}]",spot.x,spot.y,(this.Map.Spots[spot.x,spot.y].IsAvailable?"O":"X"))).ToArray()), Begin, End);
 		}
 
 		public class Factory 
@@ -388,7 +388,7 @@ namespace UniAStar
 				};
 
 				// NOTE(donghyun-you): invalidate if something changed resulted route
-				path.InvalidatedNode = path.Find(spot=>map.Map[spot.x,spot.y].IsAvailable == false);
+				path.InvalidatedNode = path.Find(spot=>map.Spots[spot.x,spot.y].IsAvailable == false);
 
 				// NOTE(donghyun-you): free node list
 				opensetBucket.Clear();
@@ -452,10 +452,10 @@ namespace UniAStar
 				int east = x + 1;
 				int west = x - 1;
 
-				bool isNorthAvailable 	= north > -1 	&& map.Map[x,north].IsAvailable && map.AllowDirection.north;
-				bool isSouthAvailable 	= south < rows 	&& map.Map[x,south].IsAvailable && map.AllowDirection.south;
-				bool isEastAvailable 	= east < cols 	&& map.Map[east,y].IsAvailable  && map.AllowDirection.east;
-				bool isWestAvailable 	= west > -1 	&& map.Map[west,y].IsAvailable  && map.AllowDirection.west;
+				bool isNorthAvailable 	= north > -1 	&& map.Spots[x,north].IsAvailable && map.AllowDirection.north;
+				bool isSouthAvailable 	= south < rows 	&& map.Spots[x,south].IsAvailable && map.AllowDirection.south;
+				bool isEastAvailable 	= east < cols 	&& map.Spots[east,y].IsAvailable  && map.AllowDirection.east;
+				bool isWestAvailable 	= west > -1 	&& map.Spots[west,y].IsAvailable  && map.AllowDirection.west;
 
 				List<InnerNode> result = this._nodeListPool.Alloc() ?? new List<InnerNode>();
 
@@ -482,11 +482,11 @@ namespace UniAStar
 			{
 				if (xN) 
 				{
-					if (xE && map.Map[east,north].IsAvailable && map.AllowDirection.northEast)
+					if (xE && map.Spots[east,north].IsAvailable && map.AllowDirection.northEast)
 					{
 						result.Add(new InnerNode(east, north));
 					}
-					if (xW && map.Map[west,north].IsAvailable && map.AllowDirection.northWest)
+					if (xW && map.Spots[west,north].IsAvailable && map.AllowDirection.northWest)
 					{
 						result.Add(new InnerNode(west, north));
 					}
@@ -494,11 +494,11 @@ namespace UniAStar
 
 				if (xS) 
 				{
-					if (xE && map.Map[east,south].IsAvailable && map.AllowDirection.southEast) 
+					if (xE && map.Spots[east,south].IsAvailable && map.AllowDirection.southEast) 
 					{
 						result.Add(new InnerNode(east, south));
 					}
-					if (xW && map.Map[west,south].IsAvailable && map.AllowDirection.southWest) 
+					if (xW && map.Spots[west,south].IsAvailable && map.AllowDirection.southWest) 
 					{
 						result.Add(new InnerNode(west, south));
 					}
@@ -516,11 +516,11 @@ namespace UniAStar
 
 				if (xE) 
 				{
-					if (xN && map.Map[east,north].IsAvailable && map.AllowDirection.northEast)
+					if (xN && map.Spots[east,north].IsAvailable && map.AllowDirection.northEast)
 					{
 						result.Add(new InnerNode(east, north));
 					}
-					if (xS && map.Map[east,south].IsAvailable && map.AllowDirection.southEast)
+					if (xS && map.Spots[east,south].IsAvailable && map.AllowDirection.southEast)
 					{
 						result.Add(new InnerNode(east, south));
 					}
@@ -528,11 +528,11 @@ namespace UniAStar
 
 				if (xW) 
 				{
-					if (xN && map.Map[west,north].IsAvailable && map.AllowDirection.northWest)
+					if (xN && map.Spots[west,north].IsAvailable && map.AllowDirection.northWest)
 					{
 						result.Add(new InnerNode(west, north));
 					}
-					if (xS && map.Map[west,south].IsAvailable && map.AllowDirection.southWest) 
+					if (xS && map.Spots[west,south].IsAvailable && map.AllowDirection.southWest) 
 					{
 						result.Add(new InnerNode(west, south));
 					}

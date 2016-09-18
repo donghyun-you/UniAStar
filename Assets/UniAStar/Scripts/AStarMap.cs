@@ -39,7 +39,7 @@ namespace UniAStar
 				throw new ArgumentException("height <= 0");
 			}
 
-			this.Map 				= new Spot[width,height];
+			this.Spots 				= new Spot[width,height];
 			this.Width 				= width;
 			this.Height 			= height;
 			this.AllowDirection 	= allow_direction;
@@ -50,7 +50,7 @@ namespace UniAStar
 			{
 				for(int y=0;y<height;y++) 
 				{
-					Map[x,y] = new Spot(this,new AStarPosition() { x = x, y = y });
+					Spots[x,y] = new Spot(this,new AStarPosition() { x = x, y = y });
 				}
 			}
 		}
@@ -108,7 +108,7 @@ namespace UniAStar
 			private set;
 		}
 
-		public Spot[,] Map
+		public Spot[,] Spots
 		{
 			get;
 			private set;
@@ -169,13 +169,13 @@ namespace UniAStar
 			{ 
 				for(int x=0;x<Width;x++) 
 				{
-					builder.Append(this.Map[x,y].IsAvailable ? "O":"X");
+					builder.Append(this.Spots[x,y].IsAvailable ? "O":"X");
 					//builder.Append(string.Format("{0}/{1}={2},",x,y,this.Map[x,y].Position.ToString()));
 				}
 				builder.AppendLine("");
 			}
 
-			return string.Format ("[AStarMap: Locker={0}, Map={1}, Width={2}, Height={3}, AllowDirection={4}, FindingType={5}]\n{6}", Locker, Map, Width, Height, AllowDirection, FindingType,builder.ToString());
+			return string.Format ("[AStarMap: Locker={0}, Map={1}, Width={2}, Height={3}, AllowDirection={4}, FindingType={5}]\n{6}", Locker, Spots, Width, Height, AllowDirection, FindingType,builder.ToString());
 		}
 	}
 }
