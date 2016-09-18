@@ -19,7 +19,7 @@ A* implementation based on ported version of http://devpro.it/code/137.html (MIT
 
 ```cs
 // create aStarMap (managed a* map, 10x10 size, is_allow_diagonal = true)
-AStarMap aStarMap = new AStarMap(10,10,true);
+AStarMap aStarMap = new AStarMap(10,10,AStarCardinalDirection.Factory.CreateAll(),AStarPath.FindingType.kDiagonal);
 
 // Update availability
 for(int x=0,dX=10; x<dX;x++) 
@@ -38,7 +38,7 @@ aStarMap.FindPathAsync(new AStarPosition(0,0),new AStarPosition(5,5),(AStarPath)
 {
 // done. it works on thread pool
 });
-
+		
 // if aStarPath contains 3,4 for route,
 aStarMap.Map[3,4].IsAvailable = false;
 // path will be invalidated(IsValid == false)
