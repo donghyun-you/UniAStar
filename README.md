@@ -26,7 +26,7 @@ for(int x=0,dX=10; x<dX;x++)
 {
 	for(int y=0,dY=10;y<dY;y++) 
 	{
-		aStarMap.Map[x,y].IsAvailable = true/* or false from your buffer*/;
+		aStarMap.Spots[x,y].IsAvailable = true/* or false from your buffer*/;
 	}
 }
 
@@ -40,7 +40,7 @@ aStarMap.FindPathAsync(new AStarPosition(0,0),new AStarPosition(5,5),(AStarPath)
 });
 		
 // if aStarPath contains 3,4 for route,
-aStarMap.Map[3,4].IsAvailable = false;
+aStarMap.Spots[3,4].IsAvailable = false;
 // path will be invalidated(IsValid == false)
 Debug.Assert(aStarPath.IsValid);
 
